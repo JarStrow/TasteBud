@@ -1,1 +1,2 @@
-- [x] Everything
+- [ ] Design web application
+- [ ] Add Google Authentication
