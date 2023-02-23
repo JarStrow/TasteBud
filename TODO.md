@@ -2,4 +2,4 @@
 - [ ] Implement a method for persistent data storage
 - [ ] Add Google Authentication
 - [ ] Design and implement a GUI
-- [ ] Continuos integration
+- [ ] Continuous integration
