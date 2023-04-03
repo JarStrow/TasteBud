@@ -30,7 +30,7 @@
 
 #navbar__logo {
     background-color: #0000;
-    background-image: linear-gradient(to top, #0D47A1 0%, #0D47A1 100%);
+    background-image: linear-gradient(to top, orange 10%, #0D47A1 110%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -43,9 +43,6 @@
     font-size: 2rem;
 }
 
-.fa-gem {
-    margin-right: 0.5rem;
-}
 
 .navbar__menu {
     display: flex;
@@ -92,12 +89,12 @@
 }
 
 .button:hover {
-    background: #81C784;
+    background: orange;
     transition: all 0.3s ease;
 }
 
 .navbar__links:hover {
-    color: #81C784;
+    color: #0D47A1;
     transition: all 0.3s ease;
 }
 
@@ -131,13 +128,14 @@
         opacity: 1;
         transition: all 0.5s ease;
         z-index: 99;
-        height: 50vh;
+        height: 55vh;
         font-size: 1.6rem;
     }
 
     #navbar__logo {
         padding-left: 25px;
     }
+    
 
     .navbar__toggle .bar {
         width: 25px;
