@@ -1,51 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TasteBud</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar__container">
-            <a href="/" id="navbar__logo"><i class="fa-solid fa-carrot";"></i>TasteBud</a>
-            <div class="navbar__toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>TasteBud</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <nav class="nav">
+                    <ul class="nav nav-list-mobile">
+                        <li class="nav-item">
+                            <div class="mobile-menu">
+                                <span class="line line-top"></span>
+                                <span class="line line-bottom"></span>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link nav-link-logo"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link nav-link-profile"></a>
+                        </li>
+                    </ul>
+                    <!-- ./nav-list nav-list-mobile -->
+                    <ul class="nav-list nav-list-larger">
+                        <li class="nav-item nav-item-hidden">
+                            <a href="#" class="nav-link nav-link-logo"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Recipes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Ingredients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link nav-link-search"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Profile</a>
+                            <div class="nav-link-sub">
+                                <!-- NEED TO FINISH -->
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- /.nav-list nav-list-larger -->
+                </nav>
             </div>
-            <ul class="navbar__menu">
-                <li class="navbar__item">
-                    <a href="/" class="navbar__links">
-                        Home
-                    </a>
-                </li>
-                <li class="navbar__item">
-                    <a href="/recipes.html" class="navbar__links">
-                        Recipes
-                    </a>
-                </li>
-                <li class="navbar__item">
-                    <a href="/ingredients.html" class="navbar__links">
-                        Ingredients
-                    </a>
-                </li>
-                <li class="navbar__item">
-                    <a href="/profile.html" class="navbar__links">
-                        Profile
-                    </a>
-                </li>
-                <li class="navbar__btn">
-                    <a href="/" class="button">
-                        Log In / Sign Up
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <script src="app.js"></script>
-</body>
+        </header>
+        <section class="home-page">
+            <div class="container">
+                <div class="title">
+                    <h2 class="title-heading">TasteBud</h2>
+                    <h3 class="title-sub-heading"><span class = "auto-type"></span></h3>
+                </div>
+            </div>
+        </section>
+        <script src="https://unpkg.com/typed.js@2.0.15/dist/typed.umd.js"></script>
+        <script>
+            var typed = new Typed(".auto-type", {
+                strings: ["Your one-stop recipe library for a healthy lifestyle."],
+                typeSpeed: 55,
+                backSpeed: 60,
+                loop: false
+            })
+        </script>
+    </body>
 </html>
