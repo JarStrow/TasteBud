@@ -34,27 +34,32 @@ connection = pymysql.connect(host='localhost', user='nathan', password='password
 
 cursor = connection.cursor()
 
-for i in range(1, 5):
-    str = ''
-    str += 'insert into recipes values ("'
-    str += recipes[i][0]
-    str += '","'
-    str += recipes[i][1]
-    str += '","'
-    str += recipes[i][2]
-    str += '","'
-    str += recipes[i][3]
-    str += '","'
-    str += recipes[i][4]
-    str += '","'
-    str += recipes[i][5]
-    str += '","'
-    str += recipes[i][6]
-    str += '","'
-    str += recipes[i][7]
-    str += '");'
+for recipe in recipes:
+    try:
+        str = ''
+        str += 'insert into recipes values ("'
+        str += recipe[0][:min(len(recipe[0]), 100)]
+        str += '","'
+        str += recipe[1][:min(len(recipe[1]), 10000)]
+        str += '","'
+        str += recipe[2][:min(len(recipe[2]), 200)]
+        str += '","'
+        str += recipe[3][:min(len(recipe[3]), 200)]
+        str += '","'
+        str += recipe[4][:min(len(recipe[4]), 30)]
+        str += '","'
+        str += recipe[5][:min(len(recipe[5]), 100)]
+        str += '","'
+        str += recipe[6][:min(len(recipe[6]), 50)]
+        str += '","'
+        str += recipe[7][:min(len(recipe[7]), 240)]
+        str += '");'
+    except:
+        continue
 
     cursor.execute(str)
+
+connection.commit()
 
 cursor.execute('select * from recipes')
 
