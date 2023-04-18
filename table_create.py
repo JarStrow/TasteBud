@@ -73,7 +73,14 @@ with open('recipes.html', 'w') as f:
             </nav>
         </div>
     </header>
-    <h1>This is a Heading</h1>
+    <section class="recipes-page">
+    <div class="container">
+            <div class="title">
+                <h2 class="title-heading">Recipes</h2>
+            </div>
+        </div>
+    </section>
+    <h1>Featured</h1>
     <p>This is a paragraph</p>
 </body>
 ''')

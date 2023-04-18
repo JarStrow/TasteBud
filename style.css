@@ -130,9 +130,28 @@ header {
 }
 
 
+.recipes-page {
+    background: url("/images/hero/recipes2-main.jpeg") center no-repeat;
+    background-size: cover;
+    margin-top: 4.4rem;
+    height: 50vh;
+}
+
+.recipes-page .title-heading, .ingredients-page .title-heading {
+    font-size: 6rem;
+    font-family: cursive;
+}
+
+.ingredients-page {
+    background: url("/images/hero/ingredients-main.jpg") center no-repeat;
+    background-size: cover;
+    margin-top: 4.4rem;
+    height: 50vh;
+}
+
 h1 {
-    text-align: center;
-    color: blue;
+    margin-top: 1.5rem;
+    color: black;
 }
 
 p {
