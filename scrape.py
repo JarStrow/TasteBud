@@ -24,6 +24,7 @@ for i in range(len(recipes)):
     for step in steps:
         if(alphaNum(step)):
             step = step.replace("\\u2028", '')
+            step = step.replace("\\u2019", '')
             step = step.replace("\\n", " ")
             step = step.replace("\n", '')
             newsteps.append(trim(step))

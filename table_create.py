@@ -64,8 +64,8 @@ with open('recipes.html', 'w') as f:
                             <li><a href="#">My Recipes</a></li>
                             <li><a href="#">Shopping List</a></li>
                             <li><a href="#">Edit Profile</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Log In / Sign Up</a></li>
+                            <li><a href="/settings.html">Settings</a></li>
+                            <li><a href="/login.html">Log In / Sign Up</a></li>
                         </ul>
                     </li>
                 </ul>

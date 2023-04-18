@@ -3,6 +3,6 @@
     - MySQL Database
 - [ ] Add Google Authentication
     - Needs a domain name before Google Authentication can be integrated
-- [ ] Design and implement a GUI
+- [x] Design and implement a GUI
     - HTML/CSS
 - [ ] Continuous integration
