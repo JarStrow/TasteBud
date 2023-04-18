@@ -1,4 +1,22 @@
-<!DOCTYPE html>
+import sqlite3
+
+# Open a connection to the database
+conn = sqlite3.connect('recipes.db')
+c = conn.cursor()
+
+# Execute a SELECT query to retrieve the recipe data
+c.execute('SELECT * FROM recipes')
+recipes = c.fetchall()
+
+# Generate an HTML table to display the recipe data
+html = '<table>\n<tr>\n<th>Name</th>\n<th>Ingredients</th>\n<th>Instructions</th>\n</tr>\n'
+for recipe in recipes:
+    html += f'<tr>\n<td>{recipe[0]}</td>\n<td>{recipe[1]}</td>\n<td>{recipe[2]}</td>\n</tr>\n'
+html += '</table>'
+
+# Write the HTML code to a file
+with open('recipes.html', 'w') as f:
+    f.write('''<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -58,27 +76,6 @@
     <h1>This is a Heading</h1>
     <p>This is a paragraph</p>
 </body>
-<table>
-<tr>
-<th>Name</th>
-<th>Ingredients</th>
-<th>Instructions</th>
-</tr>
-<tr>
-<td>Pizza</td>
-<td>Pepperoni, Cheese, Sauce</td>
-<td>Bake in oven</td>
-</tr>
-<tr>
-<td>Chicken Parmesan</td>
-<td>Chicken, Parmesan</td>
-<td>Mix and fry</td>
-</tr>
-<tr>
-<td>Banana Pudding</td>
-<td>Bananas, Pudding Mix</td>
-<td>Mix and chill</td>
-</tr>
-</table>
-</body>
-</html>
+''')
+    f.write(html)
+    f.write('\n</body>\n</html>')
