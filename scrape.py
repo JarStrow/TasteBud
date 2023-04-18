@@ -1,4 +1,4 @@
-import pymysql
+import sqlite3
 
 
 def alphaNum(s):
@@ -30,21 +30,23 @@ for i in range(len(recipes)):
     recipes[i] = newsteps
 
 
-connection = pymysql.connect(host='localhost', user='nathan', password='password', database='TasteBud')
+connection = sqlite3.connect('recipes.db')
 
 cursor = connection.cursor()
+
+cursor.execute('create table recipes (recipe varchar(100), ingredients varchar(10000), url varchar(200), cook_time varchar(30), date_published varchar(100), prep_time varchar(50), blurb varchar(240) );')
+
+
 
 for recipe in recipes:
     try:
         str = ''
         str += 'insert into recipes values ("'
-        str += recipe[0][:min(len(recipe[0]), 100)]
+        str += recipe[0][6:min(len(recipe[0]), 100)]
         str += '","'
-        str += recipe[1][:min(len(recipe[1]), 10000)]
+        str += recipe[1][13:min(len(recipe[1]), 10000)]
         str += '","'
         str += recipe[2][:min(len(recipe[2]), 200)]
-        str += '","'
-        str += recipe[3][:min(len(recipe[3]), 200)]
         str += '","'
         str += recipe[4][:min(len(recipe[4]), 30)]
         str += '","'
