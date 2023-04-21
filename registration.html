@@ -4,14 +4,13 @@
   <title>Registration</title>
   <link rel="stylesheet" href="style.css"> <!-- Add the path to your CSS file here -->
   <style>
-    /* Inline styles for demonstration purposes, consider moving to a separate CSS file */
     body {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: #f1f1f1;
     }
 
     .container {
-      width: 300px;
+      width: 400px;
       margin: 0 auto;
       margin-top: 100px;
       background-color: #fff;
@@ -39,8 +38,9 @@
       width: 100%;
       padding: 10px;
       border: 1px solid #ddd;
-      border-radius: 3px;
+      border-radius: 10px;
       font-size: 14px;
+      box-sizing: border-box;
     }
 
     input[type="submit"] {
@@ -51,7 +51,7 @@
       color: #fff;
       font-size: 16px;
       font-weight: bold;
-      border-radius: 3px;
+      border-radius: 10px;
       cursor: pointer;
     }
 
@@ -63,11 +63,11 @@
 <body>
   <div class="container">
     <h1>Registration</h1>
-    <form action="/signup" method="post"> <!-- Update the form action to your desired endpoint for handling registration form submission -->
+    <form action="/index.html" method="GET|POST"> <!-- Update the form action to your desired endpoint for handling registration form submission -->
       <label for="first-name">First Name:</label>
-      <input type="text" id="first-name" name="first_name" required>
+      <input type="text" id="first-name" name="firstname" required>
       <label for="last-name">Last Name:</label>
-      <input type="text" id="last-name" name="last_name" required>
+      <input type="text" id="last-name" name="lastname" required>
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -7,7 +7,11 @@ app = Flask(__name__)
 conn = sqlite3.connect('logins.db')
 c = conn.cursor()
 
-@app.route('/registration', methods=['POST'])
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
+
+@app.route('/index.html', methods=['POST'])
 def register():
     firstname = request.form['firstname']
     lastname = request.form['lastname']
@@ -15,16 +19,18 @@ def register():
     password = request.form['password']
     
     # Insert the form data into your database
-    c.execute("INSERT INTO users (firstname, lastname, username, password) VALUES (?, ?, ?, ?)", 
-              (firstname, lastname, username, password))
+    c.execute("INSERT INTO logins (firstname, lastname, username, password) VALUES (?, ?, ?, ?)", 
+              (str(firstname), str(lastname), str(username), str(password)))
     conn.commit()
     
-    # Close the database connection
+    # Close the cursor
     c.close()
-    conn.close()
     
-    # Redirect to success page or login page
-    return 'Registration successful!'
+    # Return the response
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
+
+# Close the database connection
+conn.close()
