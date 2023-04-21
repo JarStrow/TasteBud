@@ -1,8 +1,8 @@
 - [ ] Design web application
 - [ ] Implement a method for persistent data storage
     - MySQL Database
-- [ ] Add Google Authentication
+- [ ] Add Login Authentication
     - Needs a domain name before Google Authentication can be integrated
 - [x] Design and implement a GUI
     - HTML/CSS
-- [ ] Continuous integration
+- [x] Continuous integration
