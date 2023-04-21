@@ -6,7 +6,7 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>TasteBud</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
     </head>
     <body>
@@ -30,13 +30,13 @@
                     <!-- ./nav-list nav-list-mobile -->
                     <ul class="nav-list nav-list-larger">
                         <li class="nav-item nav-item-hidden">
-                            <a href="/index.html" class="nav-link nav-link-logo"></a>
+                            <a href="{{ url_for('index') }}" class="nav-link nav-link-logo"></a>
                         </li>
                         <li class="nav-item">
-                            <a href="/recipes.html" class="nav-link">Recipes</a>
+                            <a href="{{ url_for('recipes') }}" class="nav-link">Recipes</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/ingredients.html" class="nav-link">Ingredients</a>
+                            <a href="{{ url_for('ingredients') }}" class="nav-link">Ingredients</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link nav-link-search"></a>
@@ -47,8 +47,8 @@
                                 <li><a href="#">My Recipes</a></li>
                                 <li><a href="#">Shopping List</a></li>
                                 <li><a href="#">Edit Profile</a></li>
-                                <li><a href="/settings.html">Settings</a></li>
-                                <li><a href="/login.html">Log In / Sign Up</a></li>
+                                <li><a href="s{{ url_for('settings') }}">Settings</a></li>
+                                <li><a href="{{ url_for('login') }}">Log In / Sign Up</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -56,3 +56,37 @@
                 </nav>
             </div>
         </header>
+        <section class="recipes-page">
+            <div class="container">
+                <div class="title">
+                    <h2 class="title-heading">Recipes</h2>
+                </div>
+            </div>
+        </section>
+        <h1>Featured</h1>
+        <p>This is a paragraph</p>
+    </body>
+    <table>
+    <tr>
+    <th>Name</th>
+    <th>Ingredients</th>
+    <th>Instructions</th>
+    </tr>
+    <tr>
+    <td>Pizza</td>
+    <td>Pepperoni, Cheese, Sauce</td>
+    <td>Bake in oven</td>
+    </tr>
+    <tr>
+    <td>Chicken Parmesan</td>
+    <td>Chicken, Parmesan</td>
+    <td>Mix and fry</td>
+    </tr>
+    <tr>
+    <td>Banana Pudding</td>
+    <td>Bananas, Pudding Mix</td>
+    <td>Mix and chill</td>
+    </tr>
+    </table>
+    </body>
+</html>

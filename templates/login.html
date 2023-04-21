@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD:templates/login.html
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+=======
   <title>Registration</title>
   <link rel="stylesheet" href="style.css"> <!-- Add the path to your CSS file here -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+>>>>>>> 411230325a0f20f2139a8461170015e9e1a94c19:registration.html
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -44,12 +49,11 @@
 
     input[type="text"],
     input[type="password"] {
-      width: 100%;
+      width: calc(100% - 20px);
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 10px;
       font-size: 14px;
-      box-sizing: border-box;
     }
     .home-pager {
       background: url("images/hero/hero-main.jpeg") center no-repeat;
@@ -73,9 +77,20 @@
     input[type="submit"]:hover {
       background-color: #0d6502;
     }
+
+    .create-user-button {
+      text-align: center;
+      margin-top: 20px;
+    }
+
   </style>
 </head>
 <body>
+<<<<<<< HEAD:templates/login.html
+  <div class="container">
+    <h1>Login</h1>
+    <form action="/login" method="post"> <!-- Update the form action to your desired endpoint for handling login form submission -->
+=======
   <header>
     <div class="container">
         <nav class="nav">
@@ -130,12 +145,16 @@
       <input type="text" id="first-name" name="firstname" required>
       <label for="last-name">Last Name:</label>
       <input type="text" id="last-name" name="lastname" required>
+>>>>>>> 411230325a0f20f2139a8461170015e9e1a94c19:registration.html
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
-      <input type="submit" value="Register">
+      <input type="submit" value="Login">
     </form>
+    <div class="create-user-button">
+      <a href="{{ url_for('registration') }}">Create New User</a> <!-- Link to the registration page -->
+    </div>
   </div>
 </section>
 </body>

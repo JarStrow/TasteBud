@@ -88,7 +88,7 @@ header {
 
 /* Logo and Search Bar */
 .nav-link-logo {
-  background: url("images/icons/chef.png") center no-repeat;
+  background: url("/static/img/icons/chef.png") center no-repeat;
   background-size: contain;
   width: 1.6rem;
   height: 4.4rem;
@@ -97,13 +97,13 @@ header {
 .nav-link-search {
   width: 1.6rem;
   height: 4.4rem;
-  background: url("images/icons/search.svg") center no-repeat;
+  background: url("/static/img/icons/search.svg") center no-repeat;
   background-size: 35%;
 }
 
 /* Home Page */
 .home-page {
-  background: url("images/hero/hero-main.jpeg") center no-repeat;
+  background: url("/static/img/hero/hero-main.jpeg") center no-repeat;
   background-size: cover;
   margin-top: 4.4rem;
   height: 50vh;
@@ -131,7 +131,7 @@ header {
 
 
 .recipes-page {
-    background: url("/images/hero/recipes2-main.jpeg") center no-repeat;
+    background: url("/static/img/hero/recipes2-main.jpeg") center no-repeat;
     background-size: cover;
     margin-top: 4.4rem;
     height: 50vh;
@@ -143,7 +143,7 @@ header {
 }
 
 .ingredients-page {
-    background: url("/images/hero/ingredients-main.jpg") center no-repeat;
+    background: url("/static/img/hero/ingredients-main.jpg") center no-repeat;
     background-size: cover;
     margin-top: 4.4rem;
     height: 50vh;
