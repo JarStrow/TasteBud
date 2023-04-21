@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registration</title>
-  <link rel="stylesheet" href="style.css"> <!-- Add the path to your CSS file here -->
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -35,12 +35,11 @@
 
     input[type="text"],
     input[type="password"] {
-      width: 100%;
+      width: calc(100% - 20px);
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 10px;
       font-size: 14px;
-      box-sizing: border-box;
     }
 
     input[type="submit"] {
@@ -58,22 +57,27 @@
     input[type="submit"]:hover {
       background-color: #0056b3;
     }
+
+    .create-user-button {
+      text-align: center;
+      margin-top: 20px;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Registration</h1>
-    <form action="/index.html" method="GET|POST"> <!-- Update the form action to your desired endpoint for handling registration form submission -->
-      <label for="first-name">First Name:</label>
-      <input type="text" id="first-name" name="firstname" required>
-      <label for="last-name">Last Name:</label>
-      <input type="text" id="last-name" name="lastname" required>
+    <h1>Login</h1>
+    <form action="/login" method="post"> <!-- Update the form action to your desired endpoint for handling login form submission -->
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
-      <input type="submit" value="Register">
+      <input type="submit" value="Login">
     </form>
+    <div class="create-user-button">
+      <a href="{{ url_for('registration') }}">Create New User</a> <!-- Link to the registration page -->
+    </div>
   </div>
 </body>
 </html>
