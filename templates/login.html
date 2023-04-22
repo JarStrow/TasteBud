@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD:templates/login.html
   <title>Login</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
-=======
-  <title>Registration</title>
-  <link rel="stylesheet" href="style.css"> <!-- Add the path to your CSS file here -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
->>>>>>> 411230325a0f20f2139a8461170015e9e1a94c19:registration.html
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: #f1f1f1;
     }
-    .mainBackGround {
-      background: url("images/hero/hero-main.jpeg") center no-repeat;
-      background-size: cover;
-      margin-top: 4.4rem;
-      height: 50vh;
-    }
 
-    .register {
-      
+    .container {
       width: 400px;
       margin: 0 auto;
-      margin-top: 150px;
-      background-color: rgba(214,219,144,1);
+      margin-top: 100px;
+      background-color: #fff;
       padding: 20px;
       border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(214,219,144,1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    h2 {
+    h1 {
       text-align: center;
-      color: #f1f1f1;
+      color: #333;
     }
 
     form {
@@ -43,7 +30,6 @@
 
     label, input {
       display: block;
-      color: #f1f1f1;
       margin-bottom: 10px;
     }
 
@@ -55,18 +41,12 @@
       border-radius: 10px;
       font-size: 14px;
     }
-    .home-pager {
-      background: url("images/hero/hero-main.jpeg") center no-repeat;
-      background-size: cover;
-      height: 110vh;
-      margin-top: -100px;
-    }
 
     input[type="submit"] {
       width: 100%;
       padding: 10px;
       border: none;
-      background-color: rgba(214,219,144,1);
+      background-color: #007bff;
       color: #fff;
       font-size: 16px;
       font-weight: bold;
@@ -75,7 +55,7 @@
     }
 
     input[type="submit"]:hover {
-      background-color: #0d6502;
+      background-color: #0056b3;
     }
 
     .create-user-button {
@@ -86,66 +66,9 @@
   </style>
 </head>
 <body>
-<<<<<<< HEAD:templates/login.html
   <div class="container">
     <h1>Login</h1>
     <form action="/login" method="post"> <!-- Update the form action to your desired endpoint for handling login form submission -->
-=======
-  <header>
-    <div class="container">
-        <nav class="nav">
-            <ul class="nav nav-list-mobile">
-                <li class="nav-item">
-                    <div class="mobile-menu">
-                        <span class="line line-top"></span>
-                        <span class="line line-bottom"></span>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-link-logo"></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-link-profile"></a>
-                </li>
-            </ul>
-            <!-- ./nav-list nav-list-mobile -->
-            <ul class="nav-list nav-list-larger">
-                <li class="nav-item nav-item-hidden">
-                    <a href="/index.html" class="nav-link nav-link-logo"></a>
-                </li>
-                <li class="nav-item">
-                    <a href="/recipes.html" class="nav-link">Recipes</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/ingredients.html" class="nav-link">Ingredients</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-link-search"></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Profile</a>
-                    <ul class="nav-link-sub">
-                        <li><a href="#">My Recipes</a></li>
-                        <li><a href="#">Shopping List</a></li>
-                        <li><a href="#">Edit Profile</a></li>
-                        <li><a href="/settings.html">Settings</a></li>
-                        <li><a href="/login.html">Log In / Sign Up</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- /.nav-list nav-list-larger -->
-        </nav>
-    </div>
-    </header>
-    <section class="home-pager">
-  <div class="register">
-    <h2>Registration</h2>
-    <form action="/index.html" method="GET|POST"> <!-- Update the form action to your desired endpoint for handling registration form submission -->
-      <label for="first-name">First Name:</label>
-      <input type="text" id="first-name" name="firstname" required>
-      <label for="last-name">Last Name:</label>
-      <input type="text" id="last-name" name="lastname" required>
->>>>>>> 411230325a0f20f2139a8461170015e9e1a94c19:registration.html
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>
@@ -156,6 +79,5 @@
       <a href="{{ url_for('registration') }}">Create New User</a> <!-- Link to the registration page -->
     </div>
   </div>
-</section>
 </body>
 </html>
