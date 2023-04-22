@@ -29,7 +29,7 @@ header {
   top: 0;
   z-index: 1400;
   width: 100%;
-  height: 4.4rem;
+  height: 4.7rem;
   background-color: rgba(214,219,144,1);
   backdrop-filter: blur(2rem);
 }
@@ -50,6 +50,7 @@ header {
 .nav-link {
   font-size: 1.4rem;
   color: #fff;
+  font-weight: bolder;
   padding: 0 1rem;
   transition: opacity .5s;
 }
@@ -62,6 +63,7 @@ header {
   display: none;
   position: absolute;
   background-color: rgba(214,219,144,1);
+  backdrop-filter: blur(2rem);
   padding: 10px;
   z-index: 1;
   text-decoration: none;
@@ -79,7 +81,8 @@ header {
 }
 
 .nav-link-sub li a:hover {
-  opacity: .4;
+  color: #000;
+  opacity: .5;
 }
 
 .nav-item:hover .nav-link-sub {

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, redirect, url_for
 import sqlite3 as sql
 
 app = Flask(__name__, static_url_path='/static')
@@ -60,15 +60,15 @@ def register():
     error = None
 
     if not firstname:
-        error = 'First name is required.'
+        error = {'firstname': 'First name is required.'}
     elif not lastname:
-        error = 'Last name is required.'
+        error = {'lastname': 'Last name is required.'}
     elif not username:
-        error = 'Username is required.'
+        error = {'username': 'Username is required.'}
     elif not password:
-        error = 'Password is required.'
+        error = {'password': 'Password is required.'}
     elif check_username(username) == False:
-        error = 'Username already exists.'
+        error = {'username': 'Username already exists.'}
 
     if error:
         return render_template('registration.html', error=error)
@@ -79,6 +79,28 @@ def register():
         cur.execute("INSERT INTO logins (firstname, lastname, username, password) VALUES (?, ?, ?, ?)", (firstname, lastname, username, password))
         con.commit()
         return render_template('index.html')
+
+@app.route('/login_act',methods=['POST'])
+def login_act():
+    username = request.form['username']
+    password = request.form['password']
+    error = None
+
+    # Check if the provided username and password are valid
+    with sql.connect('logins.db') as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM logins WHERE username=? AND password=?", (username, password))
+        user = cur.fetchone()
+        if user is None:
+            # Username or password is incorrect
+            error = 'Incorrect username or password.'
+
+    # If there was an error, show the login page again with an error message
+    if error:
+        return render_template('login.html', error=error)
+
+    # Otherwise, the user is logged in, so redirect them to the index page
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5500)

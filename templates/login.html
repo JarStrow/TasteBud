@@ -6,17 +6,20 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #f1f1f1;
+      background: url("/static/img/hero/login-img2.jpeg") center no-repeat;
+      background-size: 100%;
+      background-position: 0% 10%;
     }
 
-    .container {
+    .loginmenu {
       width: 400px;
       margin: 0 auto;
       margin-top: 100px;
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
       padding: 20px;
       border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-weight: bolder;
     }
 
     h1 {
@@ -66,13 +69,62 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <header>
+    <div class="container">
+        <nav class="nav">
+            <ul class="nav nav-list-mobile">
+                <li class="nav-item">
+                    <div class="mobile-menu">
+                        <span class="line line-top"></span>
+                        <span class="line line-bottom"></span>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-link-logo"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-link-profile"></a>
+                </li>
+            </ul>
+            <!-- ./nav-list nav-list-mobile -->
+            <ul class="nav-list nav-list-larger">
+                <li class="nav-item nav-item-hidden">
+                    <a href="{{ url_for('index') }}" class="nav-link nav-link-logo"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('recipes') }}" class="nav-link">Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('ingredients') }}" class="nav-link">Ingredients</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-link-search"></a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Profile</a>
+                    <ul class="nav-link-sub">
+                        <li><a href="#">My Recipes</a></li>
+                        <li><a href="#">Shopping List</a></li>
+                        <li><a href="#">Edit Profile</a></li>
+                        <li><a href="s{{ url_for('settings') }}">Settings</a></li>
+                        <li><a href="{{ url_for('login') }}">Log In / Sign Up</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.nav-list nav-list-larger -->
+          </nav>
+      </div>
+  </header>
+  <div class="loginmenu">
     <h1>Login</h1>
-    <form action="/login" method="post">
+    <form action="{{ url_for('login_act') }}" method="post">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
+      {% if error %}
+        <p style="color:red;">{{error}}</p>
+      {% endif %}
       <input type="submit" value="Login">
     </form>
     <div class="create-user-button">
