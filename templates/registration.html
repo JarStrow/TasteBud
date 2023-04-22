@@ -62,7 +62,10 @@
 </head>
 <body>
 	<h1>Registration Form</h1>
-	<form action="{{ url_for('addrec') }}" method="post">
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+	<form action="{{ url_for('register') }}" method="post">
 		<label for="firstname">First Name:</label>
 		<input type="text" id="firstname" name="firstname"><br><br>
 		<label for="lastname">Last Name:</label>
@@ -73,5 +76,34 @@
 		<input type="password" id="password" name="password"><br><br>
 		<input type="submit" value="Submit">
 	</form>
+  <script>
+    const usernameInput = document.getElementById('username');
+    const submitButton = document.querySelector('input[type="submit"]');
+    
+    // When the submit button is clicked, check if the username already exists in the database
+    submitButton.addEventListener('click', () => {
+      const username = usernameInput.value;
+      
+      fetch('/check_username', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.exists) {
+          // If the username already exists, prevent the form from submitting and display an error message
+          usernameInput.setCustomValidity('This username is already taken.');
+          alert('This username is already taken. Please choose another.');
+        } else {
+          // If the username does not exist, allow the form to submit
+          usernameInput.setCustomValidity('');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>  
 </body>
 </html>
