@@ -32,7 +32,7 @@ def check_username(username):
             # Username is already taken
             return False
 
-# Define the routes for your app
+# Define the routes for the app
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -113,7 +113,7 @@ def login_act():
             error = 'Incorrect username or password.'
         else:
             # Verify the user's password
-            hashed_password = user[4]  # the hashed password is stored in the 4th column of the 'logins' table
+            hashed_password = user[4] 
             if not sha256_crypt.verify(password, hashed_password):
                 # Password doesn't match
                 error = 'Incorrect username or password.'
