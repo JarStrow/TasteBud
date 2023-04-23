@@ -11,9 +11,9 @@
 What is needed
 
 - [ ] Make recipes table visually more appealing (css)
-- [ ] Make the login and registration pages visually more appealing (css)
+- [x] Make the login and registration pages visually more appealing (css)
 - [ ] Fix login page to actually require people to login before their user data is accessible
-- [ ] Fix registration page to catch repeat usernames
+- [x] Fix registration page to catch repeat usernames
 - [ ] Fix search icon in navbar to actually search for things
 - [ ] Add a search function to recipes table
 - [ ] Add something to the ingredientes page

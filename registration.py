@@ -1,12 +1,27 @@
 from flask import Flask, request, render_template, redirect, url_for
 import sqlite3 as sql
+from passlib.hash import sha256_crypt
+from flask import g
 
 app = Flask(__name__, static_url_path='/static')
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sql.connect('logins.db', check_same_thread=False)
+    return db
+
+# Close the database connection at the end of each request
+@app.teardown_appcontext
+def close_db(error):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
 
 # Create a function to check if a username already exists in the database
 @app.route('/check_username', methods=['POST'])
 def check_username(username):
-    with sql.connect('logins.db') as con:
+    with get_db() as con:
         cur = con.cursor()
         cur.execute("SELECT * FROM logins WHERE username=?", (username,))
         user = cur.fetchone()
@@ -72,28 +87,36 @@ def register():
 
     if error:
         return render_template('registration.html', error=error)
+
+    enc_password = sha256_crypt.encrypt(password)
     
     # Insert the new user into the database
-    with sql.connect('logins.db') as con:
+    with get_db() as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO logins (firstname, lastname, username, password) VALUES (?, ?, ?, ?)", (firstname, lastname, username, password))
+        cur.execute("INSERT INTO logins (firstname, lastname, username, password) VALUES (?, ?, ?, ?)", (firstname, lastname, username, enc_password))
         con.commit()
-        return render_template('index.html')
+    return render_template('index.html')
 
-@app.route('/login_act',methods=['POST'])
+@app.route('/login_act', methods=['POST'])
 def login_act():
     username = request.form['username']
     password = request.form['password']
     error = None
 
-    # Check if the provided username and password are valid
-    with sql.connect('logins.db') as con:
+    # Check if the provided username exists in the database
+    with get_db() as con:
         cur = con.cursor()
-        cur.execute("SELECT * FROM logins WHERE username=? AND password=?", (username, password))
+        cur.execute("SELECT * FROM logins WHERE username=?", (username,))
         user = cur.fetchone()
         if user is None:
-            # Username or password is incorrect
+            # Username doesn't exist
             error = 'Incorrect username or password.'
+        else:
+            # Verify the user's password
+            hashed_password = user[4]  # the hashed password is stored in the 4th column of the 'logins' table
+            if not sha256_crypt.verify(password, hashed_password):
+                # Password doesn't match
+                error = 'Incorrect username or password.'
 
     # If there was an error, show the login page again with an error message
     if error:

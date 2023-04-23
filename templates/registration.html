@@ -1,182 +1,181 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Registration</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />     
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #f1f1f1;
-      background: url("/static/img/hero/reg-img.jpeg") center no-repeat;
-      background-size: 100%;
-    }
+  <head>
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />     
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: #f1f1f1;
+        background: url("/static/img/hero/reg-img.jpeg") center no-repeat;
+        background-size: 100%;
+      }
 
-    .regmenu {
-      width: 400px;
-      margin: 0 auto;
-      margin-top: 100px;
-      background-color: transparent;
-      padding: 20px;
-      border-radius: 5px;
-      font-weight: bolder;
-    }
+      .regmenu {
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 100px;
+        background-color: transparent;
+        padding: 20px;
+        border-radius: 5px;
+        font-weight: bolder;
+      }
 
-    h1 {
-      text-align: center;
-      color: #000;
-      font-weight: bolder;
-    }
+      h1 {
+        text-align: center;
+        color: #000;
+        font-weight: bolder;
+      }
 
-    form {
-      margin-top: 20px;
-    }
+      form {
+        margin-top: 20px;
+      }
 
-    label {
-      display: block;
-      color: #000;
-      margin-bottom: 10px;
-    }
+      label {
+        display: block;
+        color: #000;
+        margin-bottom: 10px;
+      }
 
-    label, input {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bolder;
-    }
+      label, input {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bolder;
+      }
 
-    input[type="text"],
-    input[type="password"] {
-      width: calc(100% - 20px);
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 14px;
-    }
+      input[type="text"],
+      input[type="password"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 14px;
+      }
 
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      background-color: #007bff;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+      }
 
-    input[type="submit"]:hover {
-      background-color: #0056b3;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container">
-        <nav class="nav">
-            <ul class="nav nav-list-mobile">
-                <li class="nav-item">
-                    <div class="mobile-menu">
-                        <span class="line line-top"></span>
-                        <span class="line line-bottom"></span>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-link-logo"></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-link-profile"></a>
-                </li>
-            </ul>
-            <!-- ./nav-list nav-list-mobile -->
-            <ul class="nav-list nav-list-larger">
-                <li class="nav-item nav-item-hidden">
-                    <a href="{{ url_for('index') }}" class="nav-link nav-link-logo"></a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url_for('recipes') }}" class="nav-link">Recipes</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url_for('ingredients') }}" class="nav-link">Ingredients</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link nav-link-search"></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Profile</a>
-                    <ul class="nav-link-sub">
-                        <li><a href="#">My Recipes</a></li>
-                        <li><a href="#">Shopping List</a></li>
-                        <li><a href="#">Edit Profile</a></li>
-                        <li><a href="s{{ url_for('settings') }}">Settings</a></li>
-                        <li><a href="{{ url_for('login') }}">Log In / Sign Up</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- /.nav-list nav-list-larger -->
-          </nav>
-      </div>
-  </header>
-	<div class="regmenu">
-    <h1>Registration Form</h1>
-    <form action="{{ url_for('register') }}" method="post">
-      <label for="firstname">First Name:</label>
-      <input type="text" id="firstname" name="firstname" required>
-      {% if error and error['firstname'] %}
-        <span style="color: red;">{{ error['firstname'] }}</span>
-      {% endif %}
-      <br><br>
-      <label for="lastname">Last Name:</label>
-      <input type="text" id="lastname" name="lastname" required>
-      {% if error and error['lastname'] %}
-        <span style="color: red;">{{ error['lastname'] }}</span>
-      {% endif %}
-      <br><br>
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
-      {% if error and error['username'] %}
-        <span style="color: red;">{{ error['username'] }}</span>
-      {% endif %}
-      <br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-      {% if error and error['password'] %}
-        <span style="color: red;">{{ error['password'] }}</span>
-      {% endif %}
-      <br><br>
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-  <script>
-    const usernameInput = document.getElementById('username');
-    const submitButton = document.querySelector('input[type="submit"]');
-    
-    // When the submit button is clicked, check if the username already exists in the database
-    submitButton.addEventListener('submit', () => {
-      const username = usernameInput.value;
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+          <nav class="nav">
+              <ul class="nav nav-list-mobile">
+                  <li class="nav-item">
+                      <div class="mobile-menu">
+                          <span class="line line-top"></span>
+                          <span class="line line-bottom"></span>
+                      </div>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#" class="nav-link nav-link-logo"></a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#" class="nav-link nav-link-profile"></a>
+                  </li>
+              </ul>
+              <!-- ./nav-list nav-list-mobile -->
+              <ul class="nav-list nav-list-larger">
+                  <li class="nav-item nav-item-hidden">
+                      <a href="{{ url_for('index') }}" class="nav-link nav-link-logo"></a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ url_for('recipes') }}" class="nav-link">Recipes</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ url_for('ingredients') }}" class="nav-link">Ingredients</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#" class="nav-link nav-link-search"></a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="#" class="nav-link">Profile</a>
+                      <ul class="nav-link-sub">
+                          <li><a href="#">My Recipes</a></li>
+                          <li><a href="#">Shopping List</a></li>
+                          <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                          <li><a href="{{ url_for('login') }}">Log In / Sign Up</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <!-- /.nav-list nav-list-larger -->
+            </nav>
+        </div>
+    </header>
+    <div class="regmenu">
+      <h1>Registration Form</h1>
+      <form action="{{ url_for('register') }}" method="post">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
+        {% if error and error['firstname'] %}
+          <span style="color: red;">{{ error['firstname'] }}</span>
+        {% endif %}
+        <br><br>
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" required>
+        {% if error and error['lastname'] %}
+          <span style="color: red;">{{ error['lastname'] }}</span>
+        {% endif %}
+        <br><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        {% if error and error['username'] %}
+          <span style="color: red;">{{ error['username'] }}</span>
+        {% endif %}
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        {% if error and error['password'] %}
+          <span style="color: red;">{{ error['password'] }}</span>
+        {% endif %}
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <script>
+      const usernameInput = document.getElementById('username');
+      const submitButton = document.querySelector('input[type="submit"]');
       
-      fetch('/check_username', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: username })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.exists) {
-          // If the username already exists, prevent the form from submitting and display an error message
-          usernameInput.setCustomValidity('This username is already taken.');
-          alert('This username is already taken. Please choose another.');
-        } else {
-          // If the username does not exist, allow the form to submit
-          usernameInput.setCustomValidity('');
-        }
-      })
-      .catch(error => console.error('Error:', error));
-    });
-  </script>  
-</body>
+      // When the submit button is clicked, check if the username already exists in the database
+      submitButton.addEventListener('submit', () => {
+        const username = usernameInput.value;
+        
+        fetch('/check_username', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username: username })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.exists) {
+            // If the username already exists, prevent the form from submitting and display an error message
+            usernameInput.setCustomValidity('This username is already taken.');
+            alert('This username is already taken. Please choose another.');
+          } else {
+            // If the username does not exist, allow the form to submit
+            usernameInput.setCustomValidity('');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      });
+    </script>  
+  </body>
 </html>
 
 

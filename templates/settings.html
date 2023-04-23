@@ -46,8 +46,7 @@
                             <ul class="nav-link-sub">
                                 <li><a href="#">My Recipes</a></li>
                                 <li><a href="#">Shopping List</a></li>
-                                <li><a href="#">Edit Profile</a></li>
-                                <li><a href="s{{ url_for('settings') }}">Settings</a></li>
+                                <li><a href="{{ url_for('settings') }}">Settings</a></li>
                                 <li><a href="{{ url_for('login') }}">Log In / Sign Up</a></li>
                             </ul>
                         </li>
@@ -56,3 +55,22 @@
                 </nav>
             </div>
         </header>
+        <h1>Profile</h1>
+            <h3>Display Name</h3>
+            <h3>Dietary Restrictions</h3>
+        <h1>Account</h1>
+            <h3>Change Username</h3>
+        <h1>Appearence</h1>
+            <p>Setting applies to this browser only</p>
+            <ul class="appearence_list">
+                <li>Device Theme</li>
+                <li>Dark Theme</li>
+                <li>Light Theme</li>
+            </ul>
+        <style>
+            h1 {
+                margin-top: 4.7rem;
+            }
+        </style>
+    </body>
+</html>
