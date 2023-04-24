@@ -52,14 +52,54 @@
               </nav>
           </div>
       </header>
-    <h1>Recipes</h1>
+    <h1 class = "title-heading">Recipes</h1>
+    <style>
+        h1{
+            padding-top: 1000px;
+            padding-bottom: 10rem;
+            background: url("/static/img/hero/cuttingboard.jpg") center no-repeat;
+            background-size: cover;
+        }
+        table {
+        border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #ad8534b5;
+            font-weight: bold;
+            text-align: center;
+        }       
+        tr:nth-child(even) {
+        background-color: #ad853479;
+        }
+        tr:nth-child(odd) {
+            background-color: #fefae0;
+        }
+        button{
+            color: #ad8534;
+            background-color: #fefae0;
+            font-weight: bolder;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont;
+            border-radius: 8px;
+            padding: 3px;
+        }
+        button:hover{
+            background-color: #ad8534b5;
+            color: #fefae0;
+            cursor: pointer;
+        }
+    </style>
     <table>
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Recipes</th>
                 <th>Ingredients</th>
                 <th>URL</th>
-                <th>Action</th>
+                <th>Favorite</th>
             </tr>
         </thead>
         <tbody>
