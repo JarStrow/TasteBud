@@ -62,7 +62,18 @@ def home():
 
 @app.route('/index')
 def index():
-    return render_template('index.html')
+
+    if current_user.is_authenticated:
+        username = session.get('username')
+        with get_db() as con:
+            cur = con.cursor()
+            cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+            user = cur.fetchone()
+            firstname = user[0]
+    else:
+        firstname = ""
+
+    return render_template('index.html', firstname=firstname)
 
 @app.route('/favorites')
 @login_required
