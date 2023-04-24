@@ -5,10 +5,12 @@ from flask import g
 
 app = Flask(__name__, static_url_path='/static')
 
+
+
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = sql.connect('logins.db', check_same_thread=False)
+        db = g._database = sql.connect('tb.db', check_same_thread=False)
     return db
 
 # Close the database connection at the end of each request
@@ -41,14 +43,48 @@ def home():
 def index():
     return render_template('index.html')
 
+@app.route('/favorites')
+def favorites():
+    conn = sql.connect('tb.db')
+    c = conn.cursor()
+    c.execute("SELECT favorites FROM favs where login_id = ?;", (user,))
+    names = c.fetchall()
+    conn.close()
+    connection = sql.connect('recipes.db')
+    cur = connection.cursor()
+    recipes = []
+    for name in names:
+        cur.execute("select recipe, ingredients, url FROM recipes where recipe = ?", (name,))
+        recipes += cur.fetchall()
+    connection.close()
+
+    return render_template('recipes.html', recipes=recipes)
+
+
 @app.route('/recipes')
 def recipes():
     conn = sql.connect('recipes.db')
     c = conn.cursor()
-    c.execute("SELECT recipe, ingredients, url FROM recipes where ingredients like '%chicken%'")
+    c.execute("SELECT recipe, ingredients, url FROM recipes ")
     recipes = c.fetchall()
     conn.close()
     return render_template('recipes.html', recipes=recipes)
+
+@app.route('/recipes', methods=['POST'])
+def add_to_favorites():
+    try:
+        recipe = request.form['recipe']
+        
+        conn = sql.connect('tb.db')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO favs(login_id, favorites) VALUES (?, ?)', (user, recipe))
+        conn.commit()
+        conn.close()
+
+        return "Recipe added to favorites!"
+    except:
+        return render_template('login.html')
+
 
 @app.route('/ingredients')
 def ingredients():
@@ -105,6 +141,7 @@ def register():
 @app.route('/login_act', methods=['POST'])
 def login_act():
     username = request.form['username']
+    user = username
     password = request.form['password']
     error = None
 

@@ -47,7 +47,7 @@ for recipe in recipes:
         str += '","'
         str += recipe[1][13:min(len(recipe[1]), 10000)]
         str += '","'
-        str += recipe[2][:min(len(recipe[2]), 200)]
+        str += recipe[2][:min(len(recipe[2]), 200)].removeprefix('url: ')
         str += '","'
         str += recipe[4][:min(len(recipe[4]), 30)]
         str += '","'

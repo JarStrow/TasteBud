@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Recipes</title>
+    <title>My Recipes</title>
 </head>
 <body>
     <h1>Recipes</h1>
@@ -20,14 +20,6 @@
                 <td>{{ recipe[0] }}</td>
                 <td>{{ recipe[1] }}</td>
                 <td><a href="{{ recipe[2] }}">{{ recipe[2] }}</a></td>
-                <td>
-                    <form action="{{ url_for('recipes') }}" method="POST">
-                        <input type="hidden" name="recipe" value="{{ recipe[0] }}">
-                        <input type="hidden" name="ingredients" value="{{ recipe[1] }}">
-                        <input type="hidden" name="url" value="{{ recipe[2] }}">
-                        <button type="submit">Add to Favorites</button>
-                    </form>
-                </td>
             </tr>
             {% endfor %}
         </tbody>
