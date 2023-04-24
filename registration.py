@@ -56,11 +56,20 @@ def check_username(username):
 # Define the routes for the app
 @app.route('/')
 def home():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        username = session.get('username')
+        with get_db() as con:
+            cur = con.cursor()
+            cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+            user = cur.fetchone()
+            firstname = user[0]
+    else:
+        firstname = ""
+
+    return render_template('index.html', firstname=firstname)
 
 @app.route('/index')
 def index():
-
     if current_user.is_authenticated:
         username = session.get('username')
         with get_db() as con:
@@ -82,6 +91,15 @@ def favorites():
     c.execute("SELECT favorites FROM favs where login_id = ?;", (username,))
     names = c.fetchall()
     conn.close()
+    if current_user.is_authenticated:
+        username = session.get('username')
+        with get_db() as con:
+            cur = con.cursor()
+            cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+            user = cur.fetchone()
+            firstname = user[0]
+    else:
+        firstname = ""
     connection = sql.connect('recipes.db')
     cur = connection.cursor()
     recipes = []
@@ -90,7 +108,7 @@ def favorites():
         recipes += cur.fetchall()
     connection.close()
 
-    return render_template('favorites.html', recipes=recipes)
+    return render_template('favorites.html', recipes=recipes, firstname=firstname)
 
 @app.route('/recipes')
 def recipes():
@@ -99,7 +117,17 @@ def recipes():
     c.execute("SELECT recipe, ingredients, url FROM recipes ")
     recipes = c.fetchall()
     conn.close()
-    return render_template('recipes.html', recipes=recipes)
+    if current_user.is_authenticated:
+        username = session.get('username')
+        with get_db() as con:
+            cur = con.cursor()
+            cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+            user = cur.fetchone()
+            firstname = user[0]
+    else:
+        firstname = ""
+
+    return render_template('recipes.html', firstname=firstname, recipes=recipes)
 
 @app.route('/recipes', methods=['POST'])
 @login_required
@@ -127,14 +155,33 @@ def add_to_favorites():
             recipes += cur.fetchall()
         connection.close()
 
-        return render_template('favorites.html', recipes=recipes)
+        if current_user.is_authenticated:
+            username = session.get('username')
+            with get_db() as con:
+                cur = con.cursor()
+                cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+                user = cur.fetchone()
+                firstname = user[0]
+        else:
+            firstname = ""
+            return render_template('favorites.html', firstname=firstname)
     except:
-        return render_template('login.html')
+        return render_template('favorites.html')
 
 
 @app.route('/ingredients')
 def ingredients():
-    return render_template('ingredients.html')
+    if current_user.is_authenticated:
+        username = session.get('username')
+        with get_db() as con:
+            cur = con.cursor()
+            cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+            user = cur.fetchone()
+            firstname = user[0]
+    else:
+        firstname = ""
+
+    return render_template('ingredients.html', firstname=firstname)
 
 @app.route('/settings')
 @login_required
@@ -159,11 +206,31 @@ def settings():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    if current_user.is_authenticated:
+        username = session.get('username')
+        with get_db() as con:
+            cur = con.cursor()
+            cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+            user = cur.fetchone()
+            firstname = user[0]
+    else:
+        firstname = ""
+
+    return render_template('login.html', firstname=firstname)
 
 @app.route('/registration')
 def registration():
-    return render_template('registration.html')
+    if current_user.is_authenticated:
+        username = session.get('username')
+        with get_db() as con:
+            cur = con.cursor()
+            cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+            user = cur.fetchone()
+            firstname = user[0]
+    else:
+        firstname = ""
+
+    return render_template('registration.html', firstname=firstname)
 
 # Handle the registration form submission
 @app.route('/register', methods=['POST'])

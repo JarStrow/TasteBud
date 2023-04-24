@@ -42,13 +42,13 @@
                             <a href="#" class="nav-link nav-link-search"></a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link"><a href="#" class="nav-link">
+                            <a href="#" class="nav-link">
                                 {% if firstname %}
-                                  {{ firstname }}
+                                    <span class="circle">{{ firstname }}'s Profile</span>
                                 {% else %}
                                   Profile
                                 {% endif %}
-                              </a></a>
+                              </a>
                             <ul class="nav-link-sub">
                                 <li><a href="{{ url_for('favorites')}}">My Recipes</a></li>
                                 <li><a href="#">Shopping List</a></li>
