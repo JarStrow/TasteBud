@@ -2,13 +2,34 @@ from flask import Flask, request, render_template, redirect, url_for
 import sqlite3 as sql
 from passlib.hash import sha256_crypt
 from flask import g
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from flask import session
 
 app = Flask(__name__, static_url_path='/static')
+app.secret_key = 'cs3203'
+
+class User(UserMixin):
+    pass
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(user_id):
+    with get_db() as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM logins WHERE id=?", (user_id,))
+        user = cur.fetchone()
+        if user is not None:
+            user = User()
+            user.id = user_id
+        return user
 
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = sql.connect('logins.db', check_same_thread=False)
+        db = g._database = sql.connect('tb.db', check_same_thread=False)
     return db
 
 # Close the database connection at the end of each request
@@ -55,12 +76,25 @@ def ingredients():
     return render_template('ingredients.html')
 
 @app.route('/settings')
+@login_required
 def settings():
-    return render_template('settings.html')
+    # Retrieve the logged-in user's username from the session
+    username = session.get('username')
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
+    # Fetch the user's information from the database using their username
+    with get_db() as con:
+        cur = con.cursor()
+        cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
+        user = cur.fetchone()
+
+    # If the user is not found, redirect to the login page
+    if user is None:
+        return render_template("login.html")
+
+    # Render the profile page with the user's information
+    firstname = user[0]
+    lastname = user[1]
+    return render_template('settings.html', firstname=firstname, lastname=lastname)
 
 @app.route('/login')
 def login():
@@ -102,6 +136,8 @@ def register():
         con.commit()
     return render_template('index.html')
 
+from flask import session
+
 @app.route('/login_act', methods=['POST'])
 def login_act():
     username = request.form['username']
@@ -122,12 +158,24 @@ def login_act():
             if not sha256_crypt.verify(password, hashed_password):
                 # Password doesn't match
                 error = 'Incorrect username or password.'
+            else:
+                # Log the user in
+                user_obj = User()
+                user_obj.id = user[0]
+                login_user(user_obj)
 
+                # Store the username in the session
+                session['username'] = username
+
+                return redirect(url_for('index'))
+    
     # If there was an error, show the login page again with an error message
     if error:
         return render_template('login.html', error=error)
 
-    # Otherwise, the user is logged in, so redirect them to the index page
+@app.route('/logout')
+def logout():
+    logout_user()
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
