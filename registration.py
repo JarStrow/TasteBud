@@ -5,7 +5,7 @@ from flask import g
 
 app = Flask(__name__, static_url_path='/static')
 
-
+currUser = None
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -47,19 +47,18 @@ def index():
 def favorites():
     conn = sql.connect('tb.db')
     c = conn.cursor()
-    c.execute("SELECT favorites FROM favs where login_id = ?;", (user,))
+    c.execute("SELECT favorites FROM favs where login_id = ?;", (currUser,))
     names = c.fetchall()
     conn.close()
     connection = sql.connect('recipes.db')
     cur = connection.cursor()
     recipes = []
     for name in names:
-        cur.execute("select recipe, ingredients, url FROM recipes where recipe = ?", (name,))
+        cur.execute("select recipe, ingredients, url FROM recipes where recipe = ?", name)
         recipes += cur.fetchall()
     connection.close()
 
-    return render_template('recipes.html', recipes=recipes)
-
+    return render_template('favorites.html', recipes=recipes)
 
 @app.route('/recipes')
 def recipes():
@@ -77,11 +76,24 @@ def add_to_favorites():
         
         conn = sql.connect('tb.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO favs(login_id, favorites) VALUES (?, ?)', (user, recipe))
+        cursor.execute('INSERT INTO favs(login_id, favorites) VALUES (?, ?)', (currUser, recipe))
         conn.commit()
         conn.close()
 
-        return "Recipe added to favorites!"
+        conn = sql.connect('tb.db')
+        c = conn.cursor()
+        c.execute("SELECT favorites FROM favs where login_id = ?;", (currUser,))
+        names = c.fetchall()
+        conn.close()
+        connection = sql.connect('recipes.db')
+        cur = connection.cursor()
+        recipes = []
+        for name in names:
+            cur.execute("select recipe, ingredients, url FROM recipes where recipe = ?", name)
+            recipes += cur.fetchall()
+        connection.close()
+
+        return render_template('favorites.html', recipes=recipes)
     except:
         return render_template('login.html')
 
@@ -141,7 +153,8 @@ def register():
 @app.route('/login_act', methods=['POST'])
 def login_act():
     username = request.form['username']
-    user = username
+    global currUser
+    currUser = username
     password = request.form['password']
     error = None
 
