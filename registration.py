@@ -43,7 +43,12 @@ def index():
 
 @app.route('/recipes')
 def recipes():
-    return render_template('recipes.html')
+    conn = sql.connect('recipes.db')
+    c = conn.cursor()
+    c.execute("SELECT recipe, ingredients, url FROM recipes where ingredients like '%chicken%'")
+    recipes = c.fetchall()
+    conn.close()
+    return render_template('recipes.html', recipes=recipes)
 
 @app.route('/ingredients')
 def ingredients():
