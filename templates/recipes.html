@@ -19,6 +19,10 @@
                 <td>{{ recipe[0] }}</td>
                 <td>{{ recipe[1] }}</td>
                 <td>{{ recipe[2] }}</td>
+                <td>
+                    <button class="like-button" data-recipe="{{ recipe[0] }}">Like</button>
+                    <span class="likes-count">{{ recipe[3] }}</span>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
