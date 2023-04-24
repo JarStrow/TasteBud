@@ -63,10 +63,32 @@
             </nav>
         </div>
     </header>
-    <h1>My Recipes</h1>
+    <h1 class = "title-heading">My Recipes</h1>
     <style>
-        h1 {
-            padding-top: 4.7rem;
+        h1{
+            padding-top: 1000px;
+            padding-bottom: 10rem;
+            background: url("/static/img/hero/cuttingboard.jpg") center no-repeat;
+            background-size: cover;
+        }
+        table {
+        border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #ad8534b5;
+            font-weight: bold;
+            text-align: center;
+        }       
+        tr:nth-child(even) {
+        background-color: #ad853479;
+        }
+        tr:nth-child(odd) {
+            background-color: #fefae0;
         }
     </style>
     <table>

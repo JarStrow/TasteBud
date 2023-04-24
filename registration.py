@@ -26,8 +26,6 @@ def load_user(user_id):
             user.id = user_id
         return user
 
-currUser = None
-
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
