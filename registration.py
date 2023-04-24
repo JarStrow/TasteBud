@@ -65,10 +65,12 @@ def index():
     return render_template('index.html')
 
 @app.route('/favorites')
+@login_required
 def favorites():
+    username = session.get('username')
     conn = sql.connect('tb.db')
     c = conn.cursor()
-    c.execute("SELECT favorites FROM favs where login_id = ?;", (currUser,))
+    c.execute("SELECT favorites FROM favs where login_id = ?;", (username,))
     names = c.fetchall()
     conn.close()
     connection = sql.connect('recipes.db')
@@ -91,19 +93,21 @@ def recipes():
     return render_template('recipes.html', recipes=recipes)
 
 @app.route('/recipes', methods=['POST'])
+@login_required
 def add_to_favorites():
     try:
         recipe = request.form['recipe']
+        username = session.get('username')
         
         conn = sql.connect('tb.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO favs(login_id, favorites) VALUES (?, ?)', (currUser, recipe))
+        cursor.execute('INSERT INTO favs(login_id, favorites) VALUES (?, ?)', (username, recipe))
         conn.commit()
         conn.close()
 
         conn = sql.connect('tb.db')
         c = conn.cursor()
-        c.execute("SELECT favorites FROM favs where login_id = ?;", (currUser,))
+        c.execute("SELECT favorites FROM favs where login_id = ?;", (username,))
         names = c.fetchall()
         conn.close()
         connection = sql.connect('recipes.db')
@@ -189,8 +193,6 @@ from flask import session
 @app.route('/login_act', methods=['POST'])
 def login_act():
     username = request.form['username']
-    global currUser
-    currUser = username
     password = request.form['password']
     error = None
 
