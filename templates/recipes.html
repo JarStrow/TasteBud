@@ -36,7 +36,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link nav-link-search"></a>
-                    </li>
+                    </li>                      
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             {% if firstname %}
@@ -98,11 +98,25 @@
             color: #fefae0;
             cursor: pointer;
         }
+        input[type="text"] {
+            background-color: transparent;
+            font-size: 16px;
+            border: 1px solid #000;
+            border-radius: 7px;
+            color: black;
+            padding: 10px;
+        }
+        .tabletitle {
+            font-size: xx-large;
+            font-weight: bold;
+        }
     </style>
+    <span class="tabletitle">Recipes</span>
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search...">
     <table>
         <thead>
             <tr>
-                <th>Recipes</th>
+                <th>Name</th>
                 <th>Ingredients</th>
                 <th>URL</th>
                 <th>Favorite</th>
@@ -110,7 +124,7 @@
         </thead>
         <tbody>
             {% for recipe in recipes %}
-            <tr>
+            <tr class="recipeRow">
                 <td>{{ recipe[0] }}</td>
                 <td>{{ recipe[1] }}</td>
                 <td><a href="{{ recipe[2] }}">{{ recipe[2] }}</a></td>
@@ -126,6 +140,30 @@
             {% endfor %}
         </tbody>
     </table>
+    <script>
+        function searchTable() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.querySelector("table");
+        tr = table.querySelectorAll(".recipeRow");
+
+        // Loop through all table rows, and hide those that don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].querySelectorAll("td");
+            for (j = 0; j < td.length; j++) {
+            txtValue = td[j].textContent || td[j].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                break;
+            } else {
+                tr[i].style.display = "none";
+            }
+            }
+        }
+        }
+    </script>
 </body>
 <style>
     h1 {

@@ -146,8 +146,11 @@ def add_to_favorites():
         
         conn = sql.connect('tb.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO favs(login_id, favorites) VALUES (?, ?)', (username, recipe))
-        conn.commit()
+        cursor.execute('SELECT COUNT(*) FROM favs WHERE login_id = ? AND favorites = ?', (username, recipe))
+        count = cursor.fetchone()[0]
+        if count == 0:
+            cursor.execute('INSERT INTO favs(login_id, favorites) VALUES (?, ?)', (username, recipe))
+            conn.commit()
         conn.close()
 
         conn = sql.connect('tb.db')

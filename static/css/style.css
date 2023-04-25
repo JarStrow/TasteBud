@@ -12,6 +12,10 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+body {
+  background-color: #e7dfc8;
+}
+
 a {
   display: block;
   text-decoration: none;
@@ -61,16 +65,15 @@ header {
 
 .nav-link-sub {
   display: none;
-  position: absolute;
+  position: fixed;
   background-color: rgba(214,219,144,1);
   backdrop-filter: blur(2rem);
   padding: 10px;
   z-index: 1;
   text-decoration: none;
   list-style-type: none;
-  left: 0;
   right: 0;
-  width: 100%;
+  width: 190px;
 }
 
 .nav-link-sub li a {
@@ -78,6 +81,8 @@ header {
   font-size: 1.4rem;
   padding: 0 1rem;
   transition: opacity .5s;
+  z-index: 1;
+  margin-bottom: 7px;
 }
 
 .nav-link-sub li a:hover {
@@ -87,6 +92,11 @@ header {
 
 .nav-item:hover .nav-link-sub {
   display: block;
+  z-index: 1;
+}
+
+.nav-item {
+  position: relative;
 }
 
 /* Logo and Search Bar */
@@ -95,6 +105,7 @@ header {
   background-size: contain;
   width: 1.6rem;
   height: 4.4rem;
+  z-index: 10;
 }
 
 .nav-link-search {
