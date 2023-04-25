@@ -65,8 +65,12 @@ def home():
             firstname = user[0]
     else:
         firstname = ""
+    connection = sql.connect('recipes.db')
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM recipes ORDER BY RANDOM() LIMIT 1")
+    recipes = cur.fetchone()
 
-    return render_template('index.html', firstname=firstname)
+    return render_template('index.html', firstname=firstname, recipes=recipes)
 
 @app.route('/index')
 def index():
@@ -79,8 +83,12 @@ def index():
             firstname = user[0]
     else:
         firstname = ""
+    connection = sql.connect('recipes.db')
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM recipes ORDER BY RANDOM() LIMIT 1")
+    recipe = cur.fetchone()
 
-    return render_template('index.html', firstname=firstname)
+    return render_template('index.html', firstname=firstname, recipe=recipe)
 
 @app.route('/favorites')
 @login_required
@@ -162,12 +170,19 @@ def add_to_favorites():
                 cur.execute("SELECT firstname, lastname FROM logins WHERE username=?", (username,))
                 user = cur.fetchone()
                 firstname = user[0]
+            connection = sql.connect('recipes.db')
+            cur = connection.cursor()
+            recipes = []
+            for name in names:
+                cur.execute("select recipe, ingredients, url FROM recipes where recipe = ?", name)
+                recipes += cur.fetchall()
+            connection.close()
+            return render_template('favorites.html', recipes=recipes, firstname=firstname)
         else:
             firstname = ""
             return render_template('favorites.html', firstname=firstname)
     except:
-        return render_template('favorites.html')
-
+        return render_template('favorites.html', firstname=firstname)
 
 @app.route('/ingredients')
 def ingredients():
