@@ -70,7 +70,7 @@ def home():
     cur.execute("SELECT * FROM recipes ORDER BY RANDOM() LIMIT 1")
     recipes = cur.fetchone()
 
-    return render_template('index.html', firstname=firstname, recipes=recipes)
+    return render_template('index.html', firstname=firstname, recipe=recipes)
 
 @app.route('/index')
 def index():
