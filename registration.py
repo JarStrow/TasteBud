@@ -277,7 +277,12 @@ def register():
         cur = con.cursor()
         cur.execute("INSERT INTO logins (firstname, lastname, username, password) VALUES (?, ?, ?, ?)", (firstname, lastname, username, enc_password))
         con.commit()
-    return render_template('index.html')
+    connection = sql.connect('recipes.db')
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM recipes ORDER BY RANDOM() LIMIT 1")
+    recipes = cur.fetchone()
+
+    return render_template('index.html', firstname=firstname, recipe=recipes)
 
 from flask import session
 
